@@ -56,8 +56,8 @@ public class Carre  extends Forme{
 	 * methode pour affichage.
 	 */
 	public String print() {
-		return "name: " + this.getName()+"IdGroupe: "+this.getIdGroupe()+"point_centre :("+this.p.getX()+";"+this.p.getY()+"coté: "+this.cote+")";
-	}
+		return "name: " + this.getName()+" , IdGroupe: "+this.getIdGroupe()+", point_centre :("+this.p.getX()+";"+this.p.getY()+") , coté: "+this.cote ;
+		}
 
 	
 

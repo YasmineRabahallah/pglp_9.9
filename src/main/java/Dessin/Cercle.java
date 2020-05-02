@@ -49,7 +49,7 @@ public class Cercle extends Forme {
      * methode pour affichage.
      */
 	public String print() {
-		return "name: " + this.getName()+"IdGroupe: "+this.getIdGroupe()+"rayon: "+this.getRayon()+"point_centre :("+this.centre.getX()+";"+this.centre.getY()+")";
+		return "name: " + this.getName()+" , IdGroupe: "+this.getIdGroupe()+" , rayon: "+this.getRayon()+" , point_centre :("+this.centre.getX()+";"+this.centre.getY()+")";
 	}
 	
 

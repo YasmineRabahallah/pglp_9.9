@@ -68,7 +68,7 @@ public class Rectangle extends Forme{
 	 */
 	public String print() {
 		
-		 return "name: " + this.getName()+"IdGroupe: "+this.getIdGroupe()+"point_centre :("+this.p.getX()+";"+this.p.getY()+"longueur: "+this.longueur+"largeur: "+this.largeur+")";
+		 return "name: " + this.getName()+" , IdGroupe: "+this.getIdGroupe()+" , point_centre :("+this.p.getX()+";"+this.p.getY()+") , longueur: "+this.longueur+" , largeur: "+this.largeur;
 	}
 
 	

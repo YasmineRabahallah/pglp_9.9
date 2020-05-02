@@ -8,12 +8,12 @@ import java.util.ArrayList;
  */
 public class GroupeForme extends Forme {
 	/**
-	 * formes liste des formes.
+	 * formes liste des formes du groupe.
 	 */
     private ArrayList<Forme> formes;
     /**
      * constructeur du GroupeForme.
-     * @param name nom du froupe.
+     * @param name nom du groupe.
      * @param IdGroupe id du groupe.
      */
 	public GroupeForme(String name, int IdGroupe) {
@@ -21,14 +21,14 @@ public class GroupeForme extends Forme {
 		this.formes = new ArrayList<Forme>();
 	}
 	/**
-	 * methode pour ajouter une forme.
+	 * methode pour ajouter une forme dans un groupe.
 	 * @param f forme.
 	 */
 	public void add(Forme f){
 		this.formes.add(f);
 	}
 	/**
-	 * methode pour supprimer une forme.
+	 * methode pour supprimer une forme dans un groupe.
 	 * @param f une forme.
 	 */
 	public void remove(Forme f){
@@ -40,7 +40,7 @@ public class GroupeForme extends Forme {
 		}
 	}
 	/**
-	 * methode pour retourner la liste des formes.
+	 * methode pour retourner la liste des formes d'un groupe.
 	 * @return formes.
 	 */
     public ArrayList<Forme> getFormes(){
