@@ -38,4 +38,26 @@ public class GroupeTest {
      assertEquals(g2.getFormes().size(),1) ;
      
 	}
+	@Test
+	public void test3(){
+     GroupeForme g3 = new GroupeForme("groupe3",3);
+     
+     Carre c1 = new Carre ("c1",3,new Point2D(5,4),10);
+     Rectangle r1 = new Rectangle ("R1",3,new Point2D(5,4),2,5);
+     g3.add(c1);
+     g3.add(r1);
+     assertEquals(g3.getName(),"groupe3") ;
+     assertEquals(g3.getIdGroupe(),3) ;
+     g3.deplacer(2, 2);
+     ArrayList<Forme> list = g3.getFormes();
+     for (Forme f :list){
+		if (f instanceof Carre){
+			Point2D p = ((Carre) f).getP();
+			assertEquals(p.getX(),7) ;
+			
+		}
+		}
+    
+     
+	}
 }
