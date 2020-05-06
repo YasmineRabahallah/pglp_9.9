@@ -94,12 +94,12 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
 			statementG = conn.prepareStatement(selectG);
 			statementG.setInt(1, idG);
 			statementG.execute();
-			ResultSet result = statementG.getResultSet();
-			if(result.next()){
-			int idGroupe = result.getInt("idGroupe");
-			String nomGroupe = result.getString("nomGroupe");
+			ResultSet resultG = statementG.getResultSet();
+			if(resultG.next()){
+			int idGroupe = resultG.getInt("idGroupe");
+			String nomGroupe = resultG.getString("nomGroupe");
 			g = new GroupeForme(nomGroupe,idGroupe);
-	        statementCr =conn.prepareStatement(selectCr);
+	      try{  statementCr =conn.prepareStatement(selectCr);
 	        statementCr.setInt(1, idG);
 	        statementCr.execute();
 	        ResultSet resultCr = statementCr.getResultSet();
@@ -112,6 +112,10 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
 				c = new Carre(nom, idGroupeC ,new Point2D(px,py),cote);
 				g.add(c);
 	        }
+	        } catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        try{
 	        statementCl =conn.prepareStatement(selectCl);
 	        statementCl.setInt(1, idG);
 	        statementCl.execute();
@@ -125,6 +129,10 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
 				cl = new Cercle (nom,idGroupeCl,new Point2D(px,py),rayon);
 				g.add(cl);
 	        }
+	        } catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        try{
 	        statementT = conn.prepareStatement(selectT);
 			statementT.setInt(1, idG);
 			statementT.execute();
@@ -141,6 +149,10 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
 			t = new Triangle(nom,idGroupeT,new Point2D(p1x,p1y),new Point2D(p2x,p2y),new Point2D(p3x,p3y));
 			g.add(t);
 			}
+	        } catch (SQLException e) {
+				e.printStackTrace();
+			}
+	        try{
 			statementR = conn.prepareStatement(selectR);
 			statementR.setInt(1, idG);
 			statementR.execute();
@@ -155,7 +167,11 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
 				r = new Rectangle(nom,idGroupeR,new Point2D(px,py),lon,lar);
 				g.add(r);
 			}
+	        } catch (SQLException e) {
+				e.printStackTrace();
 			}
+			}
+	        
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

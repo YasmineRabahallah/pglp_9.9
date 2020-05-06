@@ -8,22 +8,23 @@ import java.sql.Connection;
  *
  * @param <T> object.
  */
-public interface Dao<T>{
-	  /**
-	   * les operation CRUD.
-	   *
-	   * @param obj object.  
-	   * @return object.
-	   */
 
-	  T create(T obj);
+public interface Dao<T> {
+  /**
+   * les operation CRUD.
+   *
+   * @param obj object.  
+   * @return object.
+   */
 
-	  T retrieve(String s);
+  T create(T obj);
 
-	  T update(T obj);
+  T retrieve(String s);
 
-	  void delete(T obj);
-	  
-	  Connection getConnection();
- 
+  T update(T obj);
+
+  void delete(T obj);
+
+  Connection getConnection();
+
 }
