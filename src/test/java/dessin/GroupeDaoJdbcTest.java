@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,6 +10,15 @@ import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dessin.Carre;
+import dessin.Cercle;
+import dessin.Dao;
+import dessin.DaoFactoryJdbc;
+import dessin.GroupeForme;
+import dessin.Point2D;
+import dessin.Rectangle;
+import dessin.Triangle;
 
 public class GroupeDaoJdbcTest {
 	DaoFactoryJdbc df = new DaoFactoryJdbc();
@@ -93,7 +102,7 @@ public class GroupeDaoJdbcTest {
     public void deletetest(){
 		GroupeForme g4 = new GroupeForme("groupe4",4);
 		assertNotNull(daoG.create(g4)); 
-		assertEquals(g4.IdGroupe,4);
+		assertEquals(g4.idGroupe,4);
 		daoG.delete(g4);
 		assertNull(daoG.retrieve("4"));
 		}

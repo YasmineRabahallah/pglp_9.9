@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import java.util.ArrayList;
 /**
@@ -49,7 +49,7 @@ public class Rectangle extends Forme{
 	}
     /**
      * methode qui retourne la largeur du rectangle.
-     * @return
+     * @return largeur.
      */
 	public double getLargeur() {
 		return largeur;

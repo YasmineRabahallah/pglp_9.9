@@ -1,6 +1,6 @@
-package Dessin;
+package dessin;
 
-import static org.junit.Assert.assertEquals;
+
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -14,8 +14,7 @@ import java.util.ArrayList;
 
 
 public class GroupeDaoJdbc implements Dao<GroupeForme> {
-	
-    private Connection conn = null;
+	private Connection conn = null;
     String sql ="CREATE TABLE Groupes (idGroupe Integer  PRIMARY KEY NOT NULL , nomGroupe varchar(40) NOT NULL) " ;
     private Statement statement ;
     public GroupeDaoJdbc(){
@@ -354,5 +353,6 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
 	      e.printStackTrace();
 	    }
 	    return conn;
-	  }
+	  }	
+    
 }

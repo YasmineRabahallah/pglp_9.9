@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import java.util.ArrayList;
 /**
@@ -65,7 +65,7 @@ public class GroupeForme extends Forme {
 			sb.append(" ");
 			sb.append(f.print());
 		}
-		return "nom du groupe :"+this.name+"id du groupe:"+this.IdGroupe+" les elements du groupe sont : "+sb;
+		return "nom du groupe :"+this.name+"id du groupe:"+this.idGroupe+" les elements du groupe sont : "+sb;
 	}
 
 }

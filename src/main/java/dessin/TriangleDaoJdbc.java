@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -8,86 +8,92 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class RectangleDaoJdbc  implements Dao<Rectangle>{
-    private Connection conn;
-    private Statement statement;
-    private String sql ="CREATE TABLE  rectangle (nom varchar(20) NOT NULL PRIMARY KEY , "
+public class TriangleDaoJdbc  implements Dao<Triangle>{
+	private Connection conn ;
+	private Statement statement;
+	private String sql ="CREATE TABLE  triangle (nom varchar(20) NOT NULL PRIMARY KEY , "
 			+ "idGroupe integer references Groupes(idGroupe)  ON DELETE CASCADE,"
-			+ "px integer not null , "
-			+ "py integer not null ,"
-			+ "longueur double not null,"
-			+ "largeur double not null ) ";
-    public RectangleDaoJdbc(){
-    	conn = this.getConnection();
-    	try {
+			+ "p1x integer not null , "
+			+ "p1y integer not null ,"
+			+ "p2x integer not null , "
+			+ "p2y integer not null ,"
+			+ "p3x integer not null , "
+			+ "p3y integer not null )" ;
+	public TriangleDaoJdbc(){
+		conn = this.getConnection();
+		try {
 			statement = conn.createStatement();
-			if (!doesTableExists("rectangle",conn)){
-			statement.execute(sql);
-			}
+			if (!doesTableExists("triangle",conn)){
+				statement.execute(sql);
+				}
 			conn.close();
 			statement.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    }
-	public Rectangle create(Rectangle obj) {
+		
+	}
+
+	public Triangle create(Triangle obj) {
 		PreparedStatement statement = null;
 		conn = this.getConnection();
 		int rowsInserted = 0;
-		String insert ="INSERT INTO rectangle (nom, idGroupe, px, py ,longueur , largeur) VALUES (?, ?, ?, ?,?,?)";
+		String insert ="INSERT INTO triangle (nom, idGroupe, p1x, p1y ,p2x,p2y,p3x,p3y) VALUES (?, ?, ?, ?,?,?,?,?)";
+		
 		try {
 			statement = conn.prepareStatement(insert);
 			statement.setString(1, obj.getName());
 			statement.setInt(2, obj.getIdGroupe());
-			statement.setInt(3,obj.getP().getX());
-			statement.setInt(4, obj.getP().getY());
-			statement.setDouble(5,obj.getLongueur());
-			statement.setDouble(6, obj.getLargeur());
-			rowsInserted = statement.executeUpdate();
+			statement.setInt(3, obj.getP1().getX());
+			statement.setInt(4, obj.getP1().getY());
+			statement.setInt(5, obj.getP2().getX());
+			statement.setInt(6, obj.getP2().getY());
+			statement.setInt(7, obj.getP3().getX());
+			statement.setInt(8, obj.getP3().getY());
+	        rowsInserted = statement.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-			try {
-				if(statement != null){
-				statement.close();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			if(statement != null){
+			statement.close();
 			}
-		
-		if (rowsInserted >0){
-			System.out.println("Un nouveau rectangle a été inséré avec succès!");
-			return obj;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
-		return null;
-		}
+	
+	if (rowsInserted >0){
+		System.out.println("Un nouveau triangle a été inséré avec succès!");
+		return obj;
+	}
+	else {
+	return null;
+	}
 	}
 
-	public Rectangle retrieve(String s) {
-		PreparedStatement statement = null;
-		Rectangle r = null;
-		conn = this.getConnection();
-		String select ="SELECT * FROM rectangle where nom = (?)" ;
+	public Triangle retrieve(String s) {
+		PreparedStatement statement = null ;
+		conn = this.getConnection(); 
+		Triangle t = null ;
+		String select ="SELECT * FROM triangle where nom = (?)" ;
 		try {
 			statement = conn.prepareStatement(select);
-			statement.setString(1,s);
+			statement.setString(1, s);
 			statement.execute();
 			ResultSet result = statement.getResultSet();
-			if (result.next()){
+			if(result.next()){
 				String nom = result.getString("nom");
 				int idGroupe = result.getInt("idGroupe");
-				int px = result.getInt("px");
-				int py = result.getInt("py");
-				double lon = result.getDouble("longueur");
-				double lar = result.getDouble("largeur");
-				r = new Rectangle(nom,idGroupe,new Point2D(px,py),lon,lar);
-				conn.close();
+				int p1x = result.getInt("p1x");
+				int p1y = result.getInt("p1y");
+				int p2x = result.getInt("p2x");
+				int p2y = result.getInt("p2y");
+				int p3x = result.getInt("p3x");
+				int p3y = result.getInt("p3y");
+			t = new Triangle(nom,idGroupe,new Point2D(p1x,p1y),new Point2D(p2x,p2y),new Point2D(p3x,p3y));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,25 +106,27 @@ public class RectangleDaoJdbc  implements Dao<Rectangle>{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return r;
+		return t;
 	}
 
-	public Rectangle update(Rectangle obj) {
+	public Triangle update(Triangle obj) {
 		PreparedStatement statement = null;
-		int rowsUpdated = 0;
-		conn = this.getConnection();
-		String update = "UPDATE rectangle SET   idGroupe = ?, px = ?, py = ?, longueur =?, largeur=?  WHERE nom=?" ;
+		int rowsUpdated = 0 ;
+		conn =this.getConnection();
+		String update = "UPDATE triangle SET   idGroupe = ?, p1x = ?, p1y = ?, p2x = ?, p2y = ?, p3x = ?, p3y = ?  WHERE nom=?" ;
 		try {
 			statement = conn.prepareStatement(update);
 			statement.setInt(1, obj.getIdGroupe());
-			statement.setInt(2, obj.getP().getX());
-			statement.setInt(3, obj.getP().getY());
-			statement.setDouble(4, obj.getLongueur());
-			statement.setDouble(5, obj.getLargeur());
-			statement.setString(6, obj.getName());
+			statement.setInt(2, obj.getP1().getX());
+			statement.setInt(3, obj.getP1().getY());
+			statement.setInt(4, obj.getP2().getX());
+			statement.setInt(5, obj.getP2().getY());
+			statement.setInt(6, obj.getP3().getX());
+			statement.setInt(7, obj.getP3().getY());
+			statement.setString(8, obj.getName());
 			rowsUpdated = statement.executeUpdate();
 			if(rowsUpdated > 0){
-				System.out.println("Un rectangle existant a été mis à jour avec succès !");
+				System.out.println("Un triangle existant a été mis à jour avec succès !");
 			}
 			conn.close();
 		} catch (SQLException e) {
@@ -135,11 +143,11 @@ public class RectangleDaoJdbc  implements Dao<Rectangle>{
 		return obj;
 	}
 
-	public void delete(Rectangle obj) {
+	public void delete(Triangle obj) {
 		PreparedStatement statement = null;
-		int rowsDeleted = 0;
 		conn = this.getConnection();
-		String delete ="delete from rectangle where nom=?" ;
+		int rowsDeleted = 0;
+		String delete ="delete from triangle where nom=?" ;
 		try {
 			statement = conn.prepareStatement(delete);
 			statement.setString(1, obj.getName());
@@ -163,7 +171,6 @@ public class RectangleDaoJdbc  implements Dao<Rectangle>{
 		}
 		
 	}
-
 
 	/**
 	   * methode pour savoir si la table existe déja ou non.

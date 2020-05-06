@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,12 @@ import java.sql.Statement;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dessin.Cercle;
+import dessin.Dao;
+import dessin.DaoFactoryJdbc;
+import dessin.GroupeForme;
+import dessin.Point2D;
 
 public class CercleDaoJdbcTest {
 	DaoFactoryJdbc df = new DaoFactoryJdbc();
@@ -79,7 +85,7 @@ public class CercleDaoJdbcTest {
 		Cercle c4 = new Cercle ("cercle4",4,new Point2D(-10,2),7);
 		assertNotNull(daoC.create(c4));
 		Cercle c = daoC.retrieve("cercle4");
-		assertEquals(c.IdGroupe,4);
+		assertEquals(c.idGroupe,4);
 		daoC.delete(c4);
 		assertNull(daoC.retrieve("cercle4"));
 		}

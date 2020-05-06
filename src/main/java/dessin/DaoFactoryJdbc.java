@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 public class DaoFactoryJdbc implements AbstractFactoryJdbc {
 

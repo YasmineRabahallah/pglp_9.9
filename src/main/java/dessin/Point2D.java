@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 /**
  * class Point2D

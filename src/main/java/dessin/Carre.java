@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import java.util.ArrayList;
 /**
@@ -37,7 +37,7 @@ public class Carre  extends Forme{
 	}
     /**
      * methode qui retourne  le cote.
-     * @return
+     * @return cote.
      */
 	public double getCote() {
 		return cote;

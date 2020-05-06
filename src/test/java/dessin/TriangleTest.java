@@ -1,14 +1,17 @@
-package Dessin;
+package dessin;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import dessin.Point2D;
+import dessin.Triangle;
+
 public class TriangleTest {
 	@Test
 	public void test1(){
 		Triangle t = new Triangle("t1",3,new Point2D(2,4),new Point2D(-7,2),new Point2D(-15,-15));
-		assertEquals(t.IdGroupe,3) ;
+		assertEquals(t.idGroupe,3) ;
 		assertEquals(t.name,"t1") ;
 		assertEquals(t.getP1().getX(),2);
 		assertEquals(t.getP1().getY(),4);

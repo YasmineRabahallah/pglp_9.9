@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,6 +10,12 @@ import java.sql.Statement;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dessin.Dao;
+import dessin.DaoFactoryJdbc;
+import dessin.GroupeForme;
+import dessin.Point2D;
+import dessin.Triangle;
 
 public class TriangleDaoJdbcTest {
 	DaoFactoryJdbc df = new DaoFactoryJdbc();

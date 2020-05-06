@@ -1,10 +1,16 @@
-package Dessin;
+package dessin;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import dessin.Carre;
+import dessin.Forme;
+import dessin.GroupeForme;
+import dessin.Point2D;
+import dessin.Rectangle;
 
 public class GroupeTest {
 	@Test

@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public abstract class Forme {
 		return name;
 	}
 	public int getIdGroupe() {
-		return IdGroupe;
+		return idGroupe;
 	}
 /**
    * String name nom de la forme.
@@ -22,16 +22,17 @@ public abstract class Forme {
   /**
    * int IdGroupe groupe de la forme.
    */
-  protected int IdGroupe;
-  /**
-   * methode deplacer.
-   * @param x position sur l'axe X pour déplacer la forme.
-   * @param y position sur l'axe Y pour déplacer la forme.
-   */
+  protected int idGroupe;
+ 
   public Forme(String name , int IdGroupe){
 	  this.name = name;
-	  this.IdGroupe = IdGroupe;
+	  this.idGroupe = IdGroupe;
   }
+  /**
+   * 
+   * @param x x.
+   * @param y y.
+   */
   public abstract void deplacer(int x , int y);
   /**
    * methode afficher.

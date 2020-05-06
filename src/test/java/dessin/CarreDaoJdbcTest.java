@@ -1,4 +1,4 @@
-package Dessin;
+package dessin;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,6 +10,12 @@ import java.sql.Statement;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dessin.Carre;
+import dessin.Dao;
+import dessin.DaoFactoryJdbc;
+import dessin.GroupeForme;
+import dessin.Point2D;
 
 public class CarreDaoJdbcTest {
 	DaoFactoryJdbc df = new DaoFactoryJdbc();
@@ -78,7 +84,7 @@ public class CarreDaoJdbcTest {
 		Carre c4 = new Carre ("carre4",8,new Point2D(10,10),10);
 		assertNotNull(daoC.create(c4));
 		Carre c = daoC.retrieve("carre4");
-		assertEquals(c.IdGroupe,8);
+		assertEquals(c.idGroupe,8);
 		daoC.delete(c4);
 		assertNull(daoC.retrieve("carre4"));
 	}
