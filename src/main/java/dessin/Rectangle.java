@@ -75,9 +75,9 @@ public class Rectangle extends Forme {
    * methode pour afficher le rectangle.
    */
   public String print() {
-    return "name: " + this.getName() + " , IdGroupe: " + this.getIdGroupe()
-      + " , point_centre :(" + this.point.getX() + ";" + this.point.getY() + ") , longueur: "
-      + this.longueur + " , largeur: " + this.largeur;
+    return "Rectangle (name: " + this.getName()
+      + " , point(" + this.point.getX() + ";" + this.point.getY() + ") , longueur="
+      + this.longueur + " , largeur=" + this.largeur + ")";
   }
 
 }

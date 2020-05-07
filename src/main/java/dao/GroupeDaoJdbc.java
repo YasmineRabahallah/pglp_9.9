@@ -1,4 +1,4 @@
-package dessin;
+package dao;
 
 
 
@@ -10,6 +10,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import dessin.Carre;
+import dessin.Cercle;
+import dessin.Forme;
+import dessin.GroupeForme;
+import dessin.Point2D;
+import dessin.Rectangle;
+import dessin.Triangle;
 
 
 

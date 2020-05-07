@@ -61,9 +61,9 @@ public class Carre  extends Rectangle {
    * methode pour affichage.
    */
   public String print() {
-    return "name: " + this.getName() + " , IdGroupe: " + this.getIdGroupe() + ""
-      + ", point_centre :(" + this.point.getX() + ";"
-      + this.point.getY() + ") , coté: " + this.cote;
+    return "Carre(name: " + this.getName()
+      + ", point(" + this.point.getX() + ";"
+      + this.point.getY() + ") , coté =" + this.cote +")";
   }
 
 

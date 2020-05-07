@@ -71,10 +71,10 @@ public class Triangle extends Forme {
    * methode pour afficher le triangle.
    */
   public String print() {
-    return "name: " + this.getName() + " , IdGroupe: " + this.getIdGroupe()
-      + " , point1 :(" + this.p1.getX() + ";" + this.p1.getY()
-      + ") , point2 :(" + this.p2.getX() + ";" + this.p2.getY()
-      + ") , point3 :(" + this.p3.getX() + ";" + this.p3.getY() + ")";
+    return "Triangle (name: " + this.getName()
+      + " , point1(" + this.p1.getX() + ";" + this.p1.getY()
+      + ") , point2(" + this.p2.getX() + ";" + this.p2.getY()
+      + ") , point3(" + this.p3.getX() + ";" + this.p3.getY() + ") )";
   }
 
   

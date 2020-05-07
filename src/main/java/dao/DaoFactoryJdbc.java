@@ -1,4 +1,10 @@
-package dessin;
+package dao;
+
+import dessin.Carre;
+import dessin.Cercle;
+import dessin.GroupeForme;
+import dessin.Rectangle;
+import dessin.Triangle;
 
 /**
  * class DaoFactoryJdbc.

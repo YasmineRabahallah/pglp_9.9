@@ -11,9 +11,9 @@ import java.sql.Statement;
 import org.junit.Before;
 import org.junit.Test;
 
+import dao.Dao;
+import dao.DaoFactoryJdbc;
 import dessin.Carre;
-import dessin.Dao;
-import dessin.DaoFactoryJdbc;
 import dessin.GroupeForme;
 import dessin.Point2D;
 

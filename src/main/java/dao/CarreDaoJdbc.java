@@ -1,4 +1,4 @@
-package dessin;
+package dao;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -8,67 +8,69 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import dessin.Carre;
+import dessin.Point2D;
+
 /**
- * class RectangleDaoJdbc.
+ * class CarreDaoJdbc.
  * @author rabahallah yasmine.
  *
  */
 
-public class RectangleDaoJdbc  implements Dao<Rectangle> {
+public class CarreDaoJdbc implements Dao<Carre> {
   /**
    * attribut connection.
    */
-  private Connection conn;
-  private Statement statement;
-  /**
-   * requete sql pour créer la table rectangle.
-   */
-  private String sql = "CREATE TABLE  rectangle (nom varchar(20) NOT NULL PRIMARY KEY , "
-        + "idGroupe integer references Groupes(idGroupe)  ON DELETE CASCADE,"
-        + "px integer not null , "
-        + "py integer not null ,"
-        + "longueur double not null,"
-        + "largeur double not null ) ";
+  private Connection conn = null;
 
   /**
-   * constructeur RectangleDaoJdbc.
+   * requete sql pour crrér la table carre.
    */
-  public RectangleDaoJdbc() {
+  private String sql = "CREATE TABLE  carre (nom varchar(20) NOT NULL PRIMARY KEY , "
+      + "idGroupe integer references Groupes(idGroupe)  ON DELETE CASCADE,"
+      + "px integer not null , "
+      + "py integer not null ,"
+      + "cote double not null ) ";
+  private Statement statement;
+
+  /**
+   * constructeur CarreDaoJdbc. 
+   */
+  public CarreDaoJdbc() {
     conn = this.getConnection();
     try {
       statement = conn.createStatement();
-      if (!doesTableExists("rectangle",conn)) {
+      if (!doesTableExists("carre",conn)) {
         statement.execute(sql);
       }
-      conn.close();
       statement.close();
+      conn.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
   /**
-   * methode pour insérer des tuples dans la table rectangle.
+   * mathode create pour insérer des tuples dans la table carre.
    */
-  public Rectangle create(Rectangle obj) {
+  public Carre create(Carre obj) {
     PreparedStatement statement = null;
     conn = this.getConnection();
     int rowsInserted = 0;
-    String insert = "INSERT INTO rectangle (nom, idGroupe, px, py ,longueur , largeur)"
-        + " VALUES (?, ?, ?, ?,?,?)";
+    String insert = "INSERT INTO carre (nom, idGroupe, px, py , cote) VALUES (?, ?, ?, ?,?)";
     try {
       statement = conn.prepareStatement(insert);
       statement.setString(1, obj.getName());
       statement.setInt(2, obj.getIdGroupe());
-      statement.setInt(3,obj.getP().getX());
+      statement.setInt(3, obj.getP().getX());
       statement.setInt(4, obj.getP().getY());
-      statement.setDouble(5,obj.getLongueur());
-      statement.setDouble(6, obj.getLargeur());
+      statement.setDouble(5, obj.getCote());
       rowsInserted = statement.executeUpdate();
       conn.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
+
     try {
       if (statement != null) {
         statement.close();
@@ -77,7 +79,7 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
       e.printStackTrace();
     }
     if (rowsInserted > 0) {
-      System.out.println("Un nouveau rectangle a été inséré avec succès!");
+      System.out.println("Un nouveau carre a été inséré avec succès!");
       return obj;
     } else {
       return null;
@@ -85,13 +87,13 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
   }
 
   /**
-   * methode pour chercher des tuples du la table rectangle.
+   * methode retreive pour chercher des tuples dans la table carre.
    */
-  public Rectangle retrieve(String s) {
+  public Carre retrieve(String s) {
+    Carre c = null;
     PreparedStatement statement = null;
-    Rectangle r = null;
     conn = this.getConnection();
-    String select = "SELECT * FROM rectangle where nom = (?)";
+    String select = "SELECT * FROM carre where nom = (?)";
     try {
       statement = conn.prepareStatement(select);
       statement.setString(1,s);
@@ -102,11 +104,10 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
         int idGroupe = result.getInt("idGroupe");
         int px = result.getInt("px");
         int py = result.getInt("py");
-        double lon = result.getDouble("longueur");
-        double lar = result.getDouble("largeur");
-        r = new Rectangle(nom,idGroupe,new Point2D(px,py),lon,lar);
-        conn.close();
+        double cote = result.getDouble("cote");
+        c = new Carre(nom,idGroupe,new Point2D(px,py),cote);
       }
+      conn.close();
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -117,29 +118,27 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    return r;
+    return c;
   }
 
   /**
-   * methode pour modifier des tuples du la table rectangle.
+   * methode update pour modifier des tuples dans la table carre.
    */
-  public Rectangle update(Rectangle obj) {
-    PreparedStatement statement = null;
+  public Carre update(Carre obj) {
     int rowsUpdated = 0;
+    PreparedStatement statement = null;
     conn = this.getConnection();
-    String update = "UPDATE rectangle SET   idGroupe = ?, px = ?, py = ?,"
-        + " longueur =?, largeur=?  WHERE nom=?";
+    String update = "UPDATE carre SET   idGroupe = ?, px = ?, py = ?, cote =? WHERE nom=?";
     try {
       statement = conn.prepareStatement(update);
       statement.setInt(1, obj.getIdGroupe());
       statement.setInt(2, obj.getP().getX());
       statement.setInt(3, obj.getP().getY());
-      statement.setDouble(4, obj.getLongueur());
-      statement.setDouble(5, obj.getLargeur());
-      statement.setString(6, obj.getName());
+      statement.setDouble(4, obj.getCote());
+      statement.setString(5, obj.getName());
       rowsUpdated = statement.executeUpdate();
       if (rowsUpdated > 0) {
-        System.out.println("Un rectangle existant a été mis à jour avec succès !");
+        System.out.println("Un carre existant a été mis à jour avec succès !");
       }
       conn.close();
     } catch (SQLException e) {
@@ -156,19 +155,19 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
   }
 
   /**
-   * methode pour supprimer des tupes du la table rectangle.
+   * methode delete pour supprimer des tuples dans la tables carre.
    */
-  public void delete(Rectangle obj) {
+  public void delete(Carre obj) {
     PreparedStatement statement = null;
-    int rowsDeleted = 0;
     conn = this.getConnection();
-    String delete = "delete from rectangle where nom=?";
+    int rowsDeleted = 0;
+    String delete = "delete from carre where nom=?";
     try {
       statement = conn.prepareStatement(delete);
       statement.setString(1, obj.getName());
       rowsDeleted = statement.executeUpdate();
       if (rowsDeleted > 0) {
-        System.out.println("Un membre du rectangle a été supprimé avec succès!");
+        System.out.println("Un membre du carre a été supprimé avec succès!");
       } else {
         System.out.println("element n'existe pas");
       }
@@ -185,6 +184,7 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
     }
 
   }
+
 
   /**
    * methode pour savoir si la table existe déja ou non.
@@ -218,5 +218,4 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
     }
     return conn;
   }
-
 }
