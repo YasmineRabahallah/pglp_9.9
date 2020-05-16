@@ -63,7 +63,7 @@ public class Carre  extends Rectangle {
   public String print() {
     return "Carre(name: " + this.getName()
       + ", point(" + this.point.getX() + ";"
-      + this.point.getY() + ") , coté =" + this.cote +")";
+      + this.point.getY() + ") , coté =" + this.cote + ")";
   }
 
 

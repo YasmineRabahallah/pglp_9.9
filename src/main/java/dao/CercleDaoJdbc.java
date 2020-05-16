@@ -1,5 +1,7 @@
 package dao;
 
+import dessin.Cercle;
+import dessin.Point2D;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -8,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import dessin.Cercle;
-import dessin.Point2D;
 
 public class CercleDaoJdbc implements Dao<Cercle> {
 
@@ -22,7 +22,7 @@ public class CercleDaoJdbc implements Dao<Cercle> {
    * la requte da creation de la table cercle.
    */
   private String sql = "CREATE TABLE  cercle (nom varchar(20) NOT NULL PRIMARY KEY , "
-      + "idGroupe integer references Groupes(idGroupe) ON DELETE CASCADE,"
+      + "idGroupe integer references Groupes(idGroupe) ON DELETE SET NULL,"
       + "px integer not null , "
       + "py integer not null ,"
       + "rayon double not null ) ";

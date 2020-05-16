@@ -1,5 +1,7 @@
 package dao;
 
+import dessin.Point2D;
+import dessin.Rectangle;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -8,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import dessin.Point2D;
-import dessin.Rectangle;
 
 /**
  * class RectangleDaoJdbc.
@@ -27,7 +27,7 @@ public class RectangleDaoJdbc  implements Dao<Rectangle> {
    * requete sql pour créer la table rectangle.
    */
   private String sql = "CREATE TABLE  rectangle (nom varchar(20) NOT NULL PRIMARY KEY , "
-        + "idGroupe integer references Groupes(idGroupe)  ON DELETE CASCADE,"
+        + "idGroupe integer references Groupes(idGroupe)  ON DELETE SET NULL,"
         + "px integer not null , "
         + "py integer not null ,"
         + "longueur double not null,"

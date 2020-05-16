@@ -1,5 +1,7 @@
 package dao;
 
+import dessin.Carre;
+import dessin.Point2D;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -7,9 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import dessin.Carre;
-import dessin.Point2D;
 
 /**
  * class CarreDaoJdbc.
@@ -27,7 +26,7 @@ public class CarreDaoJdbc implements Dao<Carre> {
    * requete sql pour crrér la table carre.
    */
   private String sql = "CREATE TABLE  carre (nom varchar(20) NOT NULL PRIMARY KEY , "
-      + "idGroupe integer references Groupes(idGroupe)  ON DELETE CASCADE,"
+      + "idGroupe integer references Groupes(idGroupe)  ON DELETE SET NULL,"
       + "px integer not null , "
       + "py integer not null ,"
       + "cote double not null ) ";

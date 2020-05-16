@@ -1,5 +1,7 @@
 package dao;
 
+import dessin.Point2D;
+import dessin.Triangle;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -8,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import dessin.Point2D;
-import dessin.Triangle;
 
 /**
  * class TriangleDaoJdbc.
@@ -21,7 +21,7 @@ public class TriangleDaoJdbc  implements Dao<Triangle> {
   private Connection conn;
   private Statement statement;
   private String sql = "CREATE TABLE  triangle (nom varchar(20) NOT NULL PRIMARY KEY , "
-      + "idGroupe integer references Groupes(idGroupe)  ON DELETE CASCADE,"
+      + "idGroupe integer references Groupes(idGroupe)  ON DELETE SET NULL,"
       + "p1x integer not null , "
       + "p1y integer not null ,"
       + "p2x integer not null , "

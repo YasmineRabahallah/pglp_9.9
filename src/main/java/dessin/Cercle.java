@@ -60,7 +60,7 @@ public class Cercle extends Forme {
    * methode pour affichage.
    */
   public String print() {
-    return "Cercle(name: " + this.getName() +" , point_centre("
+    return "Cercle(name: " + this.getName() + " , point_centre("
       + this.centre.getX() + ";" + this.centre.getY() + "), rayon= "
       + this.getRayon() + ")";
   }
