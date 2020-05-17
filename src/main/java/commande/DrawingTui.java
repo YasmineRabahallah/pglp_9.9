@@ -156,9 +156,11 @@ public class DrawingTui {
 		  break;
 	     case "exit":
     	  cmd = new CommandExit();
+    	  ((CommandMove)cmd).execute();
           break;
 	  
 	   default:
+		   System.out.println("commande non valide");
 		   return null;
 	  }
 	  }catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
