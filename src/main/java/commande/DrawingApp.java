@@ -28,7 +28,7 @@ public enum DrawingApp {
     System.out.println("pout quiter entree exit ");
     System.out.println("");
     DrawingTui dt = new DrawingTui();
-    System.out.println("Entrez votre commande ou exit pour quitter ");
+    System.out.println("Entrez une valide commande ou exit pour quitter ");
     Scanner sc = new Scanner(System.in, "UTF-8");
     String saisie = "";
     while (true) {
