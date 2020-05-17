@@ -10,70 +10,102 @@ import dessin.Triangle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class DrawingTui.
+ * @author rabahallah yasmine.
+ *
+ */
 public class DrawingTui {
-  private List<Forme> listeFormes ;
-  private List<GroupeForme> listeGroupes ;
+
+  /**
+   * liste des formes créér par l'utilisateur.
+   */
+  private List<Forme> listeFormes;
+
+  /**
+   * listes des groupes créer par l'utilisateur.
+   */
+  private List<GroupeForme> listeGroupes;
+
+  /**
+   * constructeur DrawingTui. 
+   */
   public DrawingTui() {
     listeFormes = new ArrayList<Forme>();
     listeGroupes = new ArrayList<GroupeForme>();
   }
 
-  public Icommande getDepFormeCmd (String[] chaine) {
+  /**
+   * methode pour retouner commande de deplacement d'une forme.
+   * @param chaine entréé par l'utilisateur.
+   * @return cmd commande poue l'executer.
+   */
+  public Icommande getDepFormeCmd(String[] chaine) {
     Icommande cmd = null; 
     if (chaine.length == 4)  {
       Forme forme = getForme(listeFormes,chaine[1]);
-      if(forme==null){
+      if (forme == null) {
         System.out.println("la forme n'existe pas");
       } else {
-      int depX = Integer.parseInt(chaine[2]);
-      int depY = Integer.parseInt(chaine[3]);
-      if(forme instanceof Carre) {
-        cmd = new CommandMoveCarre(((Carre)forme),depX,depY);
-      }
-      if(forme instanceof Cercle) {
-        cmd = new CommandMoveCercle(((Cercle)forme),depX,depY);
-      }
-      if(forme instanceof Rectangle) {
-        cmd = new CommandMoveRectangle(((Rectangle)forme),depX,depY);
-      }
-      if(forme instanceof Triangle) {
-        cmd = new CommandMoveTriangle(((Triangle)forme),depX,depY);
-      }
-      ((CommandMove)cmd).execute();
-      }
-      return cmd;
-    } else {
-    System.out.println("commande non valide");
-    return null;
-    } 	
-  }
-
-  public Icommande getDepGroupeCmd (String[] chaine){
-    Icommande cmd = null;
-    if (chaine.length == 4)  {
-      GroupeForme groupe = getGroupe(listeGroupes,chaine[1]);
-        if(groupe == null){
-          System.out.println("la forme n'existe pas"); 
-        } else {
-          int depX = Integer.parseInt(chaine[2]);
-          int depY = Integer.parseInt(chaine[3]);
-          cmd = new CommandMoveGroup(groupe,depX,depY);
-          ((CommandMove)cmd).execute();
+        int depX = Integer.parseInt(chaine[2]);
+        int depY = Integer.parseInt(chaine[3]);
+        if (forme instanceof Carre) {
+          cmd = new CommandMoveCarre(((Carre)forme),depX,depY);
         }
+        if (forme instanceof Cercle) {
+          cmd = new CommandMoveCercle(((Cercle)forme),depX,depY);
+        }
+        if (forme instanceof Rectangle) {
+          cmd = new CommandMoveRectangle(((Rectangle)forme),depX,depY);
+        }
+        if (forme instanceof Triangle) {
+          cmd = new CommandMoveTriangle(((Triangle)forme),depX,depY);
+        }
+        ((CommandMove)cmd).execute();
+      }
       return cmd;
     } else {
       System.out.println("commande non valide");
-      return null ;
+      return null;
     }
   }
 
-  public Icommande getCreationCmd(String[] chaine){
+  /**
+   * methode pour retourner la commande de deplacement d'un groupe.
+   * @param chaine entrée par l'utilisateur pour la traiter.
+   * @return cmd de deplacement a executer.
+   */
+  public Icommande getDepGroupeCmd(String[] chaine) {
+    Icommande cmd = null;
+    if (chaine.length == 4)  {
+      GroupeForme groupe = getGroupe(listeGroupes,chaine[1]);
+      if (groupe == null) {
+        System.out.println("la forme n'existe pas"); 
+      } else {
+        int depX = Integer.parseInt(chaine[2]);
+        int depY = Integer.parseInt(chaine[3]);
+        cmd = new CommandMoveGroup(groupe,depX,depY);
+        ((CommandMove)cmd).execute();
+      }
+      return cmd;
+    } else {
+      System.out.println("commande non valide");
+      return null;
+    }
+  }
+
+  /**
+   * methode pour retourner la commande de creation d'un forme.
+   * @param chaine entrée par l'utilisateur.
+   * @return cmd commande de creation a executer.
+   */
+  public Icommande getCreationCmd(String[] chaine) {
     Icommande cmd = null;
     Forme forme = null;
-    try{
-      switch(chaine[1].toLowerCase()){
+    try {
+      switch (chaine[1].toLowerCase()) {
         case"carre":
-          if(chaine.length == 6){
+          if (chaine.length == 6) {
             String nom = chaine[0];
             int idGroupe = Integer.parseInt(chaine[2]);
             int px = Integer.parseInt(chaine[3]);
@@ -85,11 +117,11 @@ public class DrawingTui {
             createGroupe(idGroupe,(Carre) forme);
           } else {
             System.out.println("commande non valide");
-            return null ;
+            return null;
           } 
-        break;
+          break;
         case"groupe":
-          if(chaine.length == 3){
+          if (chaine.length == 3) {
             String nom = chaine[0];
             int idGroupe = Integer.parseInt(chaine[2]);
             cmd = new CommadCreateGroup(nom,idGroupe);
@@ -97,12 +129,12 @@ public class DrawingTui {
             this.listeGroupes.add((GroupeForme) forme);
           } else {
             System.out.println("commande non valide");
-            return null ;
+            return null;
           }
-        break;
+          break;
         case"cercle":
-          if(chaine.length == 6){
-            String nom = chaine[0] ;
+          if (chaine.length == 6) {
+            String nom = chaine[0];
             int idGroupe = Integer.parseInt(chaine[2]);
             int px = Integer.parseInt(chaine[3]);
             int py = Integer.parseInt(chaine[4]);
@@ -113,12 +145,12 @@ public class DrawingTui {
             createGroupe(idGroupe,(Cercle) forme);
           } else {
             System.out.println("commande non valide");
-            return null ;
+            return null;
           }
-        break;
+          break;
         case"rectangle":
-          if(chaine.length == 7){
-            String nom = chaine[0] ;
+          if (chaine.length == 7) {
+            String nom = chaine[0];
             int idGroupe = Integer.parseInt(chaine[2]);
             int px = Integer.parseInt(chaine[3]);
             int py = Integer.parseInt(chaine[4]);
@@ -130,12 +162,12 @@ public class DrawingTui {
             createGroupe(idGroupe,(Rectangle) forme);
           } else {
             System.out.println("commande non valide");
-            return null ;
+            return null;
           }
-        break;
+          break;
         case"triangle":
-          if(chaine.length == 9){
-            String nom = chaine[0] ;
+          if (chaine.length == 9) {
+            String nom = chaine[0];
             int idGroupe = Integer.parseInt(chaine[2]);
             int p1x = Integer.parseInt(chaine[3]);
             int p1y = Integer.parseInt(chaine[4]);
@@ -143,117 +175,158 @@ public class DrawingTui {
             int p2y = Integer.parseInt(chaine[6]);
             int p3x = Integer.parseInt(chaine[7]);
             int p3y = Integer.parseInt(chaine[8]);
-            cmd = new CommandCreatTriangle(nom,idGroupe,new Point2D(p1x,p1y),new Point2D(p2x,p2y),new Point2D(p3x,p3y));
+            cmd = new CommandCreatTriangle(nom,idGroupe,new Point2D(p1x,p1y),
+                new Point2D(p2x,p2y),new Point2D(p3x,p3y));
             forme = ((CommandCreateForme<Triangle>)cmd).execute();
             this.listeFormes.add((Triangle) forme);
             createGroupe(idGroupe,(Triangle) forme);
           } else {
             System.out.println("commande non valide");
-            return null ;
+            return null;
           }
-        break;
+          break;
         case "exit":
           cmd = new CommandExit();
           ((CommandMove)cmd).execute();
-        break;
+          break;
         default:
           System.out.println("commande non valide");
           return null;
       }
-    }catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+    } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
       return null;
     }
     return cmd;  
   }
 
-  public Icommande nextCommande(String Text){
+  /**
+   * methode nextCommande pour traiter la commande du l'utilisateur.
+   * @param text chiane entrée.
+   * @return commande a executer.
+   */
+  public Icommande nextCommande(String text) {
     Icommande commande = null;
-    String TextTraite =Text.replaceAll("[()=,;]"," ");
-    String[] chaine = TextTraite.split("\\s+");
-    try{
-      switch(chaine[0].toLowerCase()){
-      case"move":
-        commande =  getDepFormeCmd(chaine);
-      break;
-	  case"movegroupe":
-        commande =  getDepGroupeCmd(chaine);
-	  break;
-	  default:
-        commande = getCreationCmd(chaine);
+    String textTraite = text.replaceAll("[()=,;]"," ");
+    String[] chaine = textTraite.split("\\s+");
+    try {
+      switch (chaine[0].toLowerCase()) {
+        case"move":
+          commande =  getDepFormeCmd(chaine);
+          break;
+        case"movegroupe":
+          commande =  getDepGroupeCmd(chaine);
+          break;
+        default:
+          commande = getCreationCmd(chaine);
       }
-    }catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
       return null;
     }
     return commande;
   }
 
-  public Forme getForme(List<Forme> l,String nomForme){
-    for(Forme f :l){
-      if (f.getName().equals(nomForme)){
+  /**
+   * methode pour retrouver une forme dans une liste.
+   * @param l la liste.
+   * @param nomForme nom de la forme.
+   * @return la forme avec le nom chercher.
+   */
+  public Forme getForme(List<Forme> l,String nomForme) {
+    for (Forme f :l) {
+      if (f.getName().equals(nomForme)) {
         return f;
       }
     }
     return null;
   }
 
-  public GroupeForme getGroupe(List<GroupeForme> l,String nomGroupe){
-    for(GroupeForme g :l){
-      if (g.getName().equals(nomGroupe)){
+  /**
+   * methode pour retrouver un groupe dans une liste.
+   * @param l la liste des groupes.
+   * @param nomGroupe nom du groupe.
+   * @return le groupe rechercher.
+   */
+  public GroupeForme getGroupe(List<GroupeForme> l,String nomGroupe) {
+    for (GroupeForme g :l) {
+      if (g.getName().equals(nomGroupe)) {
         return g;
       }
     }
-	return null;
+    return null;
   }
 
-  public void createGroupe(int idG , Forme f) {
+  /**
+   * methode pour creation un groupe s'existe pas et ajouter la forme a ce groupe.
+   * si le groupe existe on ajoute seulement la forme a ce groupe.
+   * @param idG id du groupe.
+   * @param f forme a ajouter dans le groupe
+   */
+  public void createGroupe(int idG,Forme f) {
     Boolean existeG = false;
-    for(GroupeForme g:listeGroupes){
-      if(g.getIdGroupe()== idG){
+    for (GroupeForme g:listeGroupes) {
+      if (g.getIdGroupe() == idG) {
         g.add(f);
         existeG = true;
       }
     }
-    if(existeG.equals(false)) {
-      GroupeForme gr = new GroupeForme("groupe"+idG,idG);
+    if (existeG.equals(false)) {
+      GroupeForme gr = new GroupeForme("groupe" + idG,idG);
       listeGroupes.add(gr);
       gr.add(f);
     }
   }
 
-  public List<GroupeForme> getlistGroupes(){
+  /**
+   * methode pour retourner la liste des groupes créer.
+   * @return listeGroupes.
+   */
+  public List<GroupeForme> getlistGroupes() {
     return listeGroupes;  
   }
 
-  public List<Forme> getlistFormes(){
+  /**
+   * methodes pour retourner la liste des formes créer.
+   * @return listeFormes.
+   */
+  public List<Forme> getlistFormes() {
     return listeFormes;  
   }
 
+  /**
+   * methode pour affichage d'une forme.
+   * @param f une forme.
+   * @return affichage d'une forme.
+   */
   public String afficheDessin(Forme f) {
-    if(f instanceof Carre) {
+    if (f instanceof Carre) {
       return ((Carre)f).print();
     }
-    if(f instanceof Cercle) {
+    if (f instanceof Cercle) {
       return ((Cercle)f).print();
     }
-    if(f instanceof Rectangle) {
+    if (f instanceof Rectangle) {
       return ((Rectangle)f).print();
     }
-    if(f instanceof Triangle) {
+    if (f instanceof Triangle) {
       return ((Triangle)f).print();
     }
-    if(f instanceof GroupeForme) {
+    if (f instanceof GroupeForme) {
       return ((GroupeForme)f).print();
     }
-    return null;	
+    return null;
   }
 
+  /**
+   * methode pour retourner tous les formes créer.
+   * @return sb.
+   */
   public String afficheAllFormes() {
-    StringBuffer affiche = new StringBuffer();
-    for(Forme forme : this.getlistGroupes()) {
-      affiche.append(this.afficheDessin(forme));
-      affiche.append("\n");
+    StringBuffer sb = new StringBuffer();
+    for (Forme forme : this.getlistGroupes()) {
+      sb.append(this.afficheDessin(forme));
+      sb.append("\n");
     }
-    return affiche+"";
+    return sb  + "";
   }
 
 }
