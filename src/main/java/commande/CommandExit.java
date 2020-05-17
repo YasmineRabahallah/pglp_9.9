@@ -1,10 +1,11 @@
 package commande;
 
-public class CommandExit implements Icommande  {
+public class CommandExit implements Icommande {
 
 	@Override
 	public void execute() {
-		Runtime.getRuntime().exit(0);	
+		 System.out.println(" vous avez quitter !");
+		 Runtime.getRuntime().exit(0);	
 		
 	}
 
