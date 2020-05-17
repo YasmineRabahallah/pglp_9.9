@@ -1,5 +1,13 @@
 package commande;
 
+/**
+ * CommandMove.
+ * @author rabahallah yasmine.
+ *
+ */
 public interface CommandMove extends Icommande {
-	void execute();
+  /**
+   * methode pour executer les commande de deplacement.
+   */
+  void execute();
 }
