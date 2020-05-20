@@ -5,7 +5,7 @@ package commande;
  * @author rabahallah yasmine.
  *
  */
-public class CommandExit implements CommandMove  {
+public class CommandExit implements SpecifiqueCommande  {
 
   /**
    * methode pour executer la commande exit pour  quitter.

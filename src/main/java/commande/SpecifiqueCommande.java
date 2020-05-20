@@ -1,11 +1,11 @@
 package commande;
 
 /**
- * CommandMove.
+ * SpecifiqueCommande.
  * @author rabahallah yasmine.
  *
  */
-public interface CommandMove extends Icommande {
+public interface SpecifiqueCommande extends Icommande {
   /**
    * methode pour executer les commande de deplacement.
    */

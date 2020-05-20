@@ -2,7 +2,7 @@ package commande;
 
 import dessin.Rectangle;
 
-public class CommandMoveRectangle implements CommandMove {
+public class CommandMoveRectangle implements SpecifiqueCommande {
 
   /**
    * une reclange .

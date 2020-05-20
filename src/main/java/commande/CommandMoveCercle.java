@@ -8,7 +8,7 @@ import dessin.Cercle;
  *
  */
 
-public class CommandMoveCercle implements CommandMove {
+public class CommandMoveCercle implements SpecifiqueCommande {
   /**
    * un cercle.
    */

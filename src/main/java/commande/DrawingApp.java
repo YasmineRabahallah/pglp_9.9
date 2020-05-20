@@ -34,13 +34,11 @@ public enum DrawingApp {
     while (true) {
       if (sc.hasNext()) {
         saisie = sc.next();
-        if (saisie.equals("exit")) {
-          Runtime.getRuntime().exit(0);
-        } else {
+       
           dt.nextCommande(saisie);
           System.out.println("vos dessins actuels :");
           System.out.println(dt.afficheAllFormes());
-        }
+        
       }
     }
   }

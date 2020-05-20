@@ -8,7 +8,7 @@ import dessin.GroupeForme;
  *
  */
 
-public class CommandMoveGroup implements CommandMove {
+public class CommandMoveGroup implements SpecifiqueCommande {
 
   /**
    * un grouep.

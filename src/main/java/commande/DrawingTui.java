@@ -42,6 +42,7 @@ public class DrawingTui {
    */
   public Icommande getDepFormeCmd(String[] chaine) {
     Icommande cmd = null; 
+    try {
     if (chaine.length == 4)  {
       Forme forme = getForme(listeFormes,chaine[1]);
       if (forme == null) {
@@ -61,13 +62,17 @@ public class DrawingTui {
         if (forme instanceof Triangle) {
           cmd = new CommandMoveTriangle(((Triangle)forme),depX,depY);
         }
-        ((CommandMove)cmd).execute();
+        ((SpecifiqueCommande)cmd).execute();
       }
       return cmd;
     } else {
       System.out.println("commande non valide");
       return null;
     }
+    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        System.out.println("votre description de dessin est erronée.");
+        return null;
+      }
   }
 
   /**
@@ -85,7 +90,7 @@ public class DrawingTui {
         int depX = Integer.parseInt(chaine[2]);
         int depY = Integer.parseInt(chaine[3]);
         cmd = new CommandMoveGroup(groupe,depX,depY);
-        ((CommandMove)cmd).execute();
+        ((SpecifiqueCommande)cmd).execute();
       }
       return cmd;
     } else {
@@ -93,13 +98,21 @@ public class DrawingTui {
       return null;
     }
   }
+  public Icommande getLoadGroup(String nomGroupe) {
+	  FindCommande  cmdF = new FindCommande(nomGroupe);
+  	   GroupeForme gs = cmdF.execute();
+	   for (Forme f : gs.getFormes()){
+		   listeFormes.add(f);
+	   }
+	    return cmdF;
+	  }
 
   /**
    * methode pour retourner la commande de creation d'un forme.
    * @param chaine entrée par l'utilisateur.
    * @return cmd commande de creation a executer.
    */
-  public Icommande getCreationCmd(String[] chaine) {
+  public Icommande getTraitementCmd(String[] chaine) {
     Icommande cmd = null;
     Forme forme = null;
     try {
@@ -187,7 +200,7 @@ public class DrawingTui {
           break;
         case "exit":
           cmd = new CommandExit();
-          ((CommandMove)cmd).execute();
+          ((SpecifiqueCommande)cmd).execute();
           break;
         default:
           System.out.println("commande non valide");
@@ -208,8 +221,34 @@ public class DrawingTui {
     Icommande commande = null;
     String textTraite = text.replaceAll("[()=,;]"," ");
     String[] chaine = textTraite.split("\\s+");
+    Forme forme = null;
     try {
       switch (chaine[0].toLowerCase()) {
+      case "afficher":
+      	forme = getForme(listeFormes,chaine[1]);
+      	commande = new AffichageFormeCommand(forme);
+      	System.out.println(((AffichageCommand)commande).execute());
+      	break ;
+      case "affichergroupe":
+      	GroupeForme groupe = getGroupe(listeGroupes,chaine[1]);
+      	commande = new AffichageGroupeCommand (groupe);
+      	System.out.println(((AffichageCommand)commande).execute());
+      	break ;
+      case "save":
+      	GroupeForme groupeSave = getGroupe(listeGroupes,chaine[1]);
+      	commande = new SaveCommand(groupeSave);
+      	((SpecifiqueCommande )commande).execute();
+      	 System.out.println("votre dessin a éte sauvgardé");
+      case "load" :
+      	commande = getLoadGroup(chaine[1]);
+      	System.out.println("votre dessin a éte chargé");
+      break;
+      case "delete" :
+      GroupeForme groupedelete = getGroupe(listeGroupes,chaine[1]);
+      commande = new DeleteCommand(groupedelete);
+      ((SpecifiqueCommande )commande).execute();
+      System.out.println("votre dessin a éte supprimé");
+      break;
         case"move":
           commande =  getDepFormeCmd(chaine);
           break;
@@ -217,7 +256,7 @@ public class DrawingTui {
           commande =  getDepGroupeCmd(chaine);
           break;
         default:
-          commande = getCreationCmd(chaine);
+          commande = getTraitementCmd(chaine);
       }
     } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
       return null;

@@ -7,7 +7,7 @@ import dessin.Carre;
  * @author rabahallah yasmine.
  *
  */
-public class CommandMoveCarre implements CommandMove {
+public class CommandMoveCarre implements SpecifiqueCommande {
 
   /**
    * un carre.

@@ -49,7 +49,13 @@ public class GroupeDaoJdbcTest {
 	@Test
 	public void createtest(){
 		GroupeForme g1 = new GroupeForme("groupe1",1);
+		Cercle c1 = new Cercle ("cercle1",1,new Point2D(2,4),2);
+		g1.add(c1);
 		assertNotNull(daoG.create(g1)); 
+		Cercle c= daoCl.retrieve("cercle1");
+		 assertEquals(c.name,"cercle1");
+		
+		
 	}
 	@Test
 	public void retrievetest(){

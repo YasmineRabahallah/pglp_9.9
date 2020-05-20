@@ -8,7 +8,7 @@ import dessin.Triangle;
  *
  */
 
-public class CommandMoveTriangle implements CommandMove {
+public class CommandMoveTriangle implements SpecifiqueCommande {
 
   /**
    * un triangle.
