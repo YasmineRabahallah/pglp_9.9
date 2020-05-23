@@ -67,22 +67,21 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
       RectangleDaoJdbc rj = new RectangleDaoJdbc();
       TriangleDaoJdbc tj = new TriangleDaoJdbc();
       ArrayList<Forme> l = obj.getFormes();
-      int verifie = 0;
       for (Forme f :l) {
         if (f instanceof GroupeForme) {
-          this.create((GroupeForme)l.get(verifie));
+          this.create((GroupeForme)f);
         }
         if (f instanceof Carre) {
-          cj.create((Carre) l.get(verifie));
+          cj.create((Carre) f);
         }
         if (f instanceof Cercle) {
-          crj.create((Cercle) l.get(verifie));
+          crj.create((Cercle) f);
         }
         if (f instanceof Rectangle) {
-          rj.create((Rectangle) l.get(verifie));
+          rj.create((Rectangle) f);
         }
         if (f instanceof Triangle) {
-          tj.create((Triangle) l.get(verifie));
+          tj.create((Triangle)f);
         }
       }
       conn.close();

@@ -101,11 +101,11 @@ public class DrawingTui {
   
   /**
    * methode pour retourner la commande pour charger le dessin.
-   * @param nomGroupe du groupe.
+   * @param idGroupe du groupe.
    * @return cmdF la commande de chargement .
    */
-  public Icommande getLoadGroup(String nomGroupe) {
-    FindCommande  cmdF = new FindCommande(nomGroupe);
+  public Icommande getLoadGroup(String idGroupe) {
+    FindCommande  cmdF = new FindCommande(idGroupe);
     GroupeForme gs = cmdF.execute();
     for (Forme f : gs.getFormes()) {
       listeFormes.add(f);

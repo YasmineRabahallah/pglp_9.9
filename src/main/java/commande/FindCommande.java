@@ -12,18 +12,18 @@ import dessin.GroupeForme;
 public class FindCommande implements CommandCreateForme<GroupeForme> {
 
   /**
-   * nom du groupe chercher.
+   * id du groupe chercher.
    */
-  private String nomGroupe;
+  private String idGroupe;
   private GroupeDaoJdbc jdbc;
 
   /**
    * constructeur FindCommande.
-   * @param nom du groupe.
+   * @param id du groupe.
    */
-  public FindCommande(String nom) {
+  public FindCommande(String id) {
     this.jdbc = new GroupeDaoJdbc();
-    this.nomGroupe = nom;
+    this.idGroupe = id;
   }
 
   @Override
@@ -32,7 +32,7 @@ public class FindCommande implements CommandCreateForme<GroupeForme> {
    * methode pour execter commande de recherche.
    */
   public GroupeForme execute() {
-    return jdbc.retrieve(nomGroupe);
+    return jdbc.retrieve(idGroupe);
   }
 
 }
