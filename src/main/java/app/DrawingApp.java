@@ -1,8 +1,8 @@
 package app;
 
+import commande.DrawingTui;
 import java.util.Scanner;
 
-import commande.DrawingTui;
 
 /**
  * enum DrawingApp.
