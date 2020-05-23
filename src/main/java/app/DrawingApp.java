@@ -1,6 +1,8 @@
-package commande;
+package app;
 
 import java.util.Scanner;
+
+import commande.DrawingTui;
 
 /**
  * enum DrawingApp.
@@ -18,7 +20,7 @@ public enum DrawingApp {
     System.out.println("");
     System.out.println("-------------------------------------------------");
     System.out.println("               Drawing App");
-    System.out.println("Vous avis les choix  des commandes suivantes :");
+    System.out.println("-------------------------------------------------");
     System.out.println("Les formes que vous pouvez créer :Cercle,Carre,Rectangle,Triangle");
     System.out.println("et un groupe qui contient des formes pour construire un dessin");
     System.out.println("-------------------------------------------------");
