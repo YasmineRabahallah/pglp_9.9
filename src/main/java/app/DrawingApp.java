@@ -28,10 +28,10 @@ public enum DrawingApp {
     System.out.println("celà va créer un carre avec un id groupe : 1 et"
         + " point reference (1,2) et un cote :7 ");
     System.out.println("pour déplacer un carre la commande sera : move(carre1,7,-3)");
-    System.out.println("pour afficher un cercle la commande sera : afficher carre1");
+    System.out.println("pour afficher un cercle la commande sera : afficher(carre1)");
     System.out.println("-------------------------------------------------");
     System.out.println("pour déplacer un groupe la commande sera : movegroupe(groupe7,8,2)");
-    System.out.println("pour afficher un cercle la commande sera : affichergroupe groupe7");
+    System.out.println("pour afficher un cercle la commande sera : affichergroupe(groupe7)");
     System.out.println("-------------------------------------------------");
     System.out.println("pour enregistrer un dessin la commande sera : save(groupe7)");
     System.out.println("pour charger un dessin la commande sera laod(7)");
