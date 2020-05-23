@@ -68,8 +68,7 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
       TriangleDaoJdbc tj = new TriangleDaoJdbc();
       ArrayList<Forme> l = obj.getFormes();
       int verifie = 0;
-     
-    	  for (Forme f :l){
+      for (Forme f :l) {
         if (f instanceof GroupeForme) {
           this.create((GroupeForme)l.get(verifie));
         }
@@ -77,14 +76,14 @@ public class GroupeDaoJdbc implements Dao<GroupeForme> {
           cj.create((Carre) l.get(verifie));
         }
         if (f instanceof Cercle) {
-            crj.create((Cercle) l.get(verifie));
-          }
+          crj.create((Cercle) l.get(verifie));
+        }
         if (f instanceof Rectangle) {
-            rj.create((Rectangle) l.get(verifie));
-          }
+          rj.create((Rectangle) l.get(verifie));
+        }
         if (f instanceof Triangle) {
-            tj.create((Triangle) l.get(verifie));
-          }
+          tj.create((Triangle) l.get(verifie));
+        }
       }
       conn.close();
     } catch (SQLException e) {

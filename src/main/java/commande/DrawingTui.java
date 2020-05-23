@@ -43,36 +43,36 @@ public class DrawingTui {
   public Icommande getDepFormeCmd(String[] chaine) {
     Icommande cmd = null; 
     try {
-    if (chaine.length == 4)  {
-      Forme forme = getForme(listeFormes,chaine[1]);
-      if (forme == null) {
-        System.out.println("la forme n'existe pas");
+      if (chaine.length == 4)  {
+        Forme forme = getForme(listeFormes,chaine[1]);
+        if (forme == null) {
+          System.out.println("la forme n'existe pas");
+        } else {
+          int depX = Integer.parseInt(chaine[2]);
+          int depY = Integer.parseInt(chaine[3]);
+          if (forme instanceof Carre) {
+            cmd = new CommandMoveCarre(((Carre)forme),depX,depY);
+          }
+          if (forme instanceof Cercle) {
+            cmd = new CommandMoveCercle(((Cercle)forme),depX,depY);
+          }
+          if (forme instanceof Rectangle) {
+            cmd = new CommandMoveRectangle(((Rectangle)forme),depX,depY);
+          }
+          if (forme instanceof Triangle) {
+            cmd = new CommandMoveTriangle(((Triangle)forme),depX,depY);
+          }
+          ((SpecifiqueCommande)cmd).execute();
+        }
+        return cmd;
       } else {
-        int depX = Integer.parseInt(chaine[2]);
-        int depY = Integer.parseInt(chaine[3]);
-        if (forme instanceof Carre) {
-          cmd = new CommandMoveCarre(((Carre)forme),depX,depY);
-        }
-        if (forme instanceof Cercle) {
-          cmd = new CommandMoveCercle(((Cercle)forme),depX,depY);
-        }
-        if (forme instanceof Rectangle) {
-          cmd = new CommandMoveRectangle(((Rectangle)forme),depX,depY);
-        }
-        if (forme instanceof Triangle) {
-          cmd = new CommandMoveTriangle(((Triangle)forme),depX,depY);
-        }
-        ((SpecifiqueCommande)cmd).execute();
-      }
-      return cmd;
-    } else {
-      System.out.println("commande non valide");
-      return null;
-    }
-    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
-        System.out.println("votre description de dessin est erronée.");
+        System.out.println("commande non valide");
         return null;
       }
+    } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+      System.out.println("votre description de dessin est erronée.");
+      return null;
+    }
   }
 
   /**
@@ -98,14 +98,20 @@ public class DrawingTui {
       return null;
     }
   }
+  
+  /**
+   * methode pour retourner la commande pour charger le dessin.
+   * @param nomGroupe du groupe.
+   * @return cmdF la commande de chargement .
+   */
   public Icommande getLoadGroup(String nomGroupe) {
-	  FindCommande  cmdF = new FindCommande(nomGroupe);
-  	   GroupeForme gs = cmdF.execute();
-	   for (Forme f : gs.getFormes()){
-		   listeFormes.add(f);
-	   }
-	    return cmdF;
-	  }
+    FindCommande  cmdF = new FindCommande(nomGroupe);
+    GroupeForme gs = cmdF.execute();
+    for (Forme f : gs.getFormes()) {
+      listeFormes.add(f);
+    }
+    return cmdF;
+  }
 
   /**
    * methode pour retourner la commande de creation d'un forme.
@@ -224,31 +230,32 @@ public class DrawingTui {
     Forme forme = null;
     try {
       switch (chaine[0].toLowerCase()) {
-      case "afficher":
-      	forme = getForme(listeFormes,chaine[1]);
-      	commande = new AffichageFormeCommand(forme);
-      	System.out.println(((AffichageCommand)commande).execute());
-      	break ;
-      case "affichergroupe":
-      	GroupeForme groupe = getGroupe(listeGroupes,chaine[1]);
-      	commande = new AffichageGroupeCommand (groupe);
-      	System.out.println(((AffichageCommand)commande).execute());
-      	break ;
-      case "save":
-      	GroupeForme groupeSave = getGroupe(listeGroupes,chaine[1]);
-      	commande = new SaveCommand(groupeSave);
-      	((SpecifiqueCommande )commande).execute();
-      	 System.out.println("votre dessin a éte sauvgardé");
-      case "load" :
-      	commande = getLoadGroup(chaine[1]);
-      	System.out.println("votre dessin a éte chargé");
-      break;
-      case "delete" :
-      GroupeForme groupedelete = getGroupe(listeGroupes,chaine[1]);
-      commande = new DeleteCommand(groupedelete);
-      ((SpecifiqueCommande )commande).execute();
-      System.out.println("votre dessin a éte supprimé");
-      break;
+        case "afficher":
+          forme = getForme(listeFormes,chaine[1]);
+          commande = new AffichageFormeCommand(forme);
+          System.out.println(((AffichageCommand)commande).execute());
+          break;
+        case "affichergroupe":
+          GroupeForme groupe = getGroupe(listeGroupes,chaine[1]);
+          commande = new AffichageGroupeCommand(groupe);
+          System.out.println(((AffichageCommand)commande).execute());
+          break;
+        case "save":
+          GroupeForme groupeSave = getGroupe(listeGroupes,chaine[1]);
+          commande = new SaveCommand(groupeSave);
+          ((SpecifiqueCommande )commande).execute();
+          System.out.println("votre dessin a éte sauvgardé");
+          break;
+        case "load" :
+          commande = getLoadGroup(chaine[1]);
+          System.out.println("votre dessin a éte chargé");
+          break;
+        case "delete" :
+          GroupeForme groupedelete = getGroupe(listeGroupes,chaine[1]);
+          commande = new DeleteCommand(groupedelete);
+          ((SpecifiqueCommande )commande).execute();
+          System.out.println("votre dessin a éte supprimé");
+          break;
         case"move":
           commande =  getDepFormeCmd(chaine);
           break;

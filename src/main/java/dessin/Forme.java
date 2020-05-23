@@ -28,12 +28,12 @@ public abstract class Forme {
   /**
    * String name nom de la forme.
    */
-  protected String name;
+  public String name;
 
   /**
    * int IdGroupe groupe de la forme.
    */
-  protected int idGroupe;
+  public int idGroupe;
 
   /**
    * constructeur Forme.

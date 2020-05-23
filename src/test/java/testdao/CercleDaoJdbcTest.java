@@ -1,4 +1,4 @@
-package dessin;
+package testdao;
 
 import static org.junit.Assert.*;
 

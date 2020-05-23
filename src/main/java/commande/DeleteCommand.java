@@ -1,20 +1,37 @@
 package commande;
 
-
 import dao.GroupeDaoJdbc;
 import dessin.GroupeForme;
 
+/**
+ * class DeleteCommand.
+ * @author rabahallah yasmine.
+ *
+ */
+
 public class DeleteCommand implements SpecifiqueCommande {
-	 private GroupeForme groupe;
-	  private GroupeDaoJdbc gJdbc;
-	  public DeleteCommand(GroupeForme g){
-		  this.gJdbc = new GroupeDaoJdbc();
-		  this.groupe = g;
-	  }
-		@Override
-		public void execute() {
-		 gJdbc.delete(this.groupe);
-			
-		}
+
+  /**
+   * groupe des formes.
+   */
+  private GroupeForme groupe;
+  private GroupeDaoJdbc gjdbc;
+
+  /**
+   * constructeur DeleteCommand.
+   * @param g groupe.
+   */
+  public DeleteCommand(GroupeForme g) {
+    this.gjdbc = new GroupeDaoJdbc();
+    this.groupe = g;
+  }
+
+  @Override
+  /**
+   * methode pour executer la commande delete.
+   */
+  public void execute() {
+    gjdbc.delete(this.groupe);
+  }
 
 }

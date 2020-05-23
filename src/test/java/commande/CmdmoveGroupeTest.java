@@ -1,4 +1,4 @@
-package dessin;
+package commande;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,6 +9,8 @@ import commande.CommandCreateCarre;
 import commande.CommandCreateCercle;
 import commande.DrawingTui;
 import commande.Icommande;
+import dessin.Carre;
+import dessin.Cercle;
 
 public class CmdmoveGroupeTest {
 	DrawingTui dt = new DrawingTui();

@@ -1,4 +1,4 @@
-package dessin;
+package commande;
 
 import static org.junit.Assert.*;
 

@@ -19,13 +19,22 @@ public enum DrawingApp {
     System.out.println("-------------------------------------------------");
     System.out.println("               Drawing App");
     System.out.println("Vous avis les choix  des commandes suivantes :");
-    System.out.println("Dessiner une Forme (Cercle,Carre,Rectangle,Triangle)");
-    System.out.println("pour un Cercle de type: **cercle1 = Cercle ((0, 0), 50) **");
-    System.out.println("Dessiner un groupe de Forme **g1 = Groupe (groupe1,4)** ");
-    System.out.println("Deplacer une forme ou un groupe si ils existent ");
-    System.out.println("pour un Cercle de type: **move(cercle1(2,1)) **");
-    System.out.println("pour un Groupe de type: **movegroupe(g1(7,3))**");
-    System.out.println("pout quiter entree exit ");
+    System.out.println("Les formes que vous pouvez créer :Cercle,Carre,Rectangle,Triangle");
+    System.out.println("et un groupe qui contient des formes pour construire un dessin");
+    System.out.println("-------------------------------------------------");
+    System.out.println("pour créer un carre la commande sera : carre1=carre(1,(1,2),7)");
+    System.out.println("celà va créer un carre avec un id groupe : 1 et"
+        + " point reference (1,2) et un cote :7 ");
+    System.out.println("pour déplacer un carre la commande sera : move(carre1,7,-3)");
+    System.out.println("pour afficher un cercle la commande sera : affiche carre1");
+    System.out.println("-------------------------------------------------");
+    System.out.println("pour déplacer un groupe la commande sera : movegroupe(groupe7,8,2)");
+    System.out.println("pour afficher un cercle la commande sera : affichegroupe groupe7");
+    System.out.println("-------------------------------------------------");
+    System.out.println("pour enregistrer un dessin la commande sera : save(groupe7)");
+    System.out.println("pour charger un dessin la commande sera laod(groupe7)");
+    System.out.println("pour supprimer un dessin la commande sera : delete(groupe7");
+    
     System.out.println("");
     DrawingTui dt = new DrawingTui();
     System.out.println("Entrez une valide commande ou exit pour quitter ");
@@ -34,11 +43,14 @@ public enum DrawingApp {
     while (true) {
       if (sc.hasNext()) {
         saisie = sc.next();
-       
+        if (!saisie.equals("exit")) {
           dt.nextCommande(saisie);
           System.out.println("vos dessins actuels :");
           System.out.println(dt.afficheAllFormes());
-        
+        }
+        if (saisie.equals("exit")) {
+          Runtime.getRuntime().exit(0);
+        }
       }
     }
   }
