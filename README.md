@@ -1,6 +1,7 @@
 # Logiciel de dessin
 
-#Commandes de créations:
+#Commandes de créations
+
 cercle1=cercle(1,(2,5),7)
 Cela crée un cercle avec de la rayonne de 7 et un centre (2,5) et 1 comme id du groupe
 carre1 = carre(1,(2,5),8)
