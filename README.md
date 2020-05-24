@@ -12,19 +12,23 @@ rec = rectangle(1,(4,4),7,18)
 Cela crée un rectangle avec lon:7, lar:18 ,1 comme id du groupe, (4,4) comme ponit de reference pour créer le rectangle .
 
 #Commandes de mouvement:
+
 Tapez move  pour déplacer une forme. Par exemple: move(cercle1,(1,2))
 Pour déplacer plusieurs formes à la fois, tapez movegroupe(1) ou 1 comme id groupe qui contient des formes pour les deplacer .
 
 #Commandes d'affichage:
+
 affichier(cercle) pour afficher la forme qui porte le nom cercle1.
 affichergroupe(groupe1) pour afficher les formes du groupe avec id 1 .
 
 #Commandes Enregistrer / Charger:
+
 Tapez save nom du groupe  pour enregistrer le dessin.
 save(groupe1)
 Taper load(1) pour charger les formes du groupe d'id 1 qui existe sur la base de données
 load(1)
 
 #Commandes de suppression dans la base de données:
+
 Tapez delete forme pour supprimer une forme. Par exemple:
 delete(cercle1)
